@@ -7,7 +7,8 @@ from .views import CommentViewSet, GroupViewSet, PostViewSet
 app_name = 'api'
 
 router = routers.DefaultRouter()
-router.register('posts/(?P<post_id>[^/.]+)/comments', CommentViewSet)
+router.register('posts/(?P<post_id>[^/.]+)/comments',
+                CommentViewSet, basename='comments')
 router.register('groups', GroupViewSet)
 router.register('posts', PostViewSet)
 
