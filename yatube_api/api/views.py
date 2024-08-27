@@ -38,7 +38,7 @@ class CommentViewSet(viewsets.ModelViewSet):
         super().perform_destroy(instance)
 
 
-class GroupViewSet(ReadCreateBaseModelViewSet):
+class GroupViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
 
