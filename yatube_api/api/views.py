@@ -1,15 +1,8 @@
-from rest_framework import viewsets, mixins, exceptions
+from rest_framework import viewsets, exceptions
 from django.shortcuts import get_object_or_404
 
 from .serializers import PostSerializer, GroupSerializer, CommentSerializer
 from posts.models import Comment, Group, Post
-
-
-class ReadCreateBaseModelViewSet(
-    mixins.CreateModelMixin, mixins.RetrieveModelMixin,
-    mixins.ListModelMixin, viewsets.GenericViewSet
-):
-    pass
 
 
 class CommentViewSet(viewsets.ModelViewSet):
