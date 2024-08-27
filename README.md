@@ -64,7 +64,7 @@ pip install -r requirements.txt
 ```json
 {
     "text": "Пост с группой",
-    "group": {{group_id}}
+    "group": 1
 }
 ```
 Пример запроса к */api/v1/posts/{post_id}/comment*:
