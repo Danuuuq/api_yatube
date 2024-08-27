@@ -59,17 +59,12 @@ pip install -r requirements.txt
 ```
 Полученный токен необходимо использовать при любых запросах к API.
 3. **CRUD операции.**
-К эндпоинтам: */api/v1/posts/* и */api/v1/posts/{post_id}/comment* можно отправить запросы POST, PATCH, PUT и DELETE. Примеры запросов к */api/v1/posts/*:
+К эндпоинтам: */api/v1/posts/* и */api/v1/posts/{post_id}/comment* можно отправить запросы POST, PATCH, PUT и DELETE. 
+Примеры запросов к */api/v1/posts/* ("group" не является обазтельным полем):
 ```json
 {
-    "text": "Пост с группой", - обязательное поле
-    "group": {{group_id}} - необязательное поле
-}
-```
-```json
-{
-    "text": "Пост с группой", - обязательное поле
-    "group": {{group_id}} - необязательное поле
+    "text": "Пост с группой",
+    "group": 1
 }
 ```
 Пример запроса к */api/v1/posts/{post_id}/comment*:
