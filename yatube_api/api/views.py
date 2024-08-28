@@ -13,11 +13,15 @@ class ReadCreateBaseModelViewSet(
 
 
 class CommentViewSet(viewsets.ModelViewSet):
+    # queryset = Post.objects.all()
     serializer_class = CommentSerializer
 
     def get_queryset(self):
         post_id = self.kwargs.get('post_id')
-        new_queryset = Comment.objects.filter(post=post_id)
+        post = get_object_or_404(Post, id=post_id)
+        new_queryset = Post.objects.select_related('comments')
+        # new_queryset = post.filter.select_related('comments')
+        # new_queryset = Comment.objects.filter(post=post_id)
         return new_queryset
 
     def perform_create(self, serializer):
