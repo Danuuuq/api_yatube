@@ -2,25 +2,21 @@ from rest_framework import viewsets, exceptions
 from django.shortcuts import get_object_or_404
 
 from .serializers import PostSerializer, GroupSerializer, CommentSerializer
-from posts.models import Comment, Group, Post
+from posts.models import Group, Post
 
 
 class CommentViewSet(viewsets.ModelViewSet):
-    # queryset = Post.objects.all()
     serializer_class = CommentSerializer
 
-    def get_queryset(self):
+    def get_post(self):
         post_id = self.kwargs.get('post_id')
-        post = get_object_or_404(Post, id=post_id)
-        new_queryset = Post.objects.select_related('comments')
-        # new_queryset = post.filter.select_related('comments')
-        # new_queryset = Comment.objects.filter(post=post_id)
-        return new_queryset
+        return get_object_or_404(Post, id=post_id)
+
+    def get_queryset(self):
+        return self.get_post().comments
 
     def perform_create(self, serializer):
-        post_id = self.kwargs.get('post_id')
-        post = get_object_or_404(Post, id=post_id)
-        serializer.save(author=self.request.user, post=post)
+        serializer.save(author=self.request.user, post=self.get_post())
 
     def perform_update(self, serializer):
         if serializer.instance.author != self.request.user:
